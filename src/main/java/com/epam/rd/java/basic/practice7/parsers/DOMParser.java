@@ -13,6 +13,12 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
 import java.io.IOException;
 
 public class DOMParser {
@@ -81,5 +87,72 @@ public class DOMParser {
         Node nodePrice = element.getElementsByTagName(XMLTegs.PRICE.value()).item(0);
         item.setPrice(Double.parseDouble(nodePrice.getTextContent()));
         return item;
+    }
+
+    public static Document getDocument(ShipOrder shipOrder) throws ParserConfigurationException {
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        dbf.setNamespaceAware(true);
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        Document document = db.newDocument();
+        Element tElement = document.createElement(XMLTegs.SHIPORDER.value());
+        document.appendChild(tElement);
+        for (Order order : shipOrder.getOrders()) {
+            Element qElement = document.createElement(XMLTegs.ORDER.value());
+            tElement.appendChild(qElement);
+            Element qtElement =
+                    document.createElement(XML.QUESTION_TEXT.value());
+            qtElement.setTextContent(question.getQuestionText());
+            qElement.appendChild(qtElement);
+
+            // add answers
+            for (Answer answer : question.getAnswers()) {
+                Element aElement = document.createElement(XML.ANSWER.value());
+                aElement.setTextContent(answer.getContent());
+
+                // set attribute
+                if (answer.isCorrect()) {
+                    aElement.setAttribute(XML.CORRECT.value(), "true");
+                }
+                qElement.appendChild(aElement);
+            }
+        }
+
+        return document;
+    }
+
+    /**
+     * Saves Test object to XML file.
+     *
+     * @param test
+     *            Test object to be saved.
+     * @param xmlFileName
+     *            Output XML file name.
+     */
+    public static void saveToXML(Test test, String xmlFileName)
+            throws ParserConfigurationException, TransformerException {
+        // Test -> DOM -> XML
+        saveToXML(getDocument(test), xmlFileName);
+    }
+
+    /**
+     * Save DOM to XML.
+     *
+     * @param document
+     *            DOM to be saved.
+     * @param xmlFileName
+     *            Output XML file name.
+     */
+    public static void saveToXML(Document document, String xmlFileName)
+            throws TransformerException {
+
+        StreamResult result = new StreamResult(new File(xmlFileName));
+
+        // set up transformation
+        TransformerFactory tf = TransformerFactory.newInstance();
+        javax.xml.transform.Transformer t = tf.newTransformer();
+        t.setOutputProperty(OutputKeys.INDENT, "yes");
+
+        // run transformation
+        t.transform(new DOMSource(document), result);
     }
 }
