@@ -1,43 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<root>
-<shiporder orderid="889923" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="input.xsd">
-   <orderperson>John Smith</orderperson>
-   <shipto>
-      <name>Ola Nordmann</name>
-      <address>Langgt 23</address>
-      <city>4000 Stavanger</city>
-      <country>Norway</country>
-   </shipto>
-   <item>
-      <title>Empire Burlesque</title>
-      <note>Special Edition</note>
-      <quantity>1</quantity>
-      <price>10.90</price>
-   </item>
-   <item>
-      <title>Hide your heart</title>
-      <quantity>1</quantity>
-      <price>9.90</price>
-   </item>
-</shiporder>
-<shiporder orderid="889985"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="input.xsd">
-   <orderperson>Brad Pitt</orderperson>
-   <shipto>
-      <name>Angelina Jolie</name>
-      <address>1st avenue 23</address>
-      <city>Los Angeles</city>
-      <country>USA</country>
-   </shipto>
-   <item>
-      <title>Harry Potter and philosophy stone</title>
-      <note>Special Edition</note>
-      <quantity>3</quantity>
-      <price>99.99</price>
-   </item>
-   <item>
-      <title>Star wars</title>
-      <quantity>3</quantity>
-      <price>15.00</price>
-   </item>
-</shiporder>
-</root>
+<tt:shiporder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns:tt="http://xml.org/sax/features/validation"
+              xsi:noNamespaceSchemaLocation="input.xsd">
+    <order>
+        <orderid>889923</orderid>
+        <name>Ola Nordmann</name>
+        <address>Langgt 23</address>
+        <city>4000 Stavanger</city>
+        <country>Norway</country>
+        <item>
+            <title>Empire Burlesque</title>
+            <quantity>1</quantity>
+            <price>10.90</price>
+        </item>
+
+        <item>
+            <title>Hide your heart</title>
+            <quantity>1</quantity>
+            <price>9.90</price>
+        </item>
+    </order>
+
+    <order>
+        <orderid>889985</orderid>
+        <name>Angelina Jolie</name>
+        <address>1st avenue 23</address>
+        <city>Los Angeles</city>
+        <country>USA</country>
+        <item>
+            <title>Harry Potter and philosophy stone</title>
+            <note>Special Edition</note>
+            <quantity>3</quantity>
+            <price>99.99</price>
+        </item>
+        <item>
+            <title>Star wars</title>
+            <quantity>3</quantity>
+            <price>15.00</price>
+        </item>
+    </order>
+</tt:shiporder>

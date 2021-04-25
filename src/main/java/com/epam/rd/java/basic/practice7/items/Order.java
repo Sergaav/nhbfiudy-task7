@@ -1,19 +1,22 @@
-package com.epam.rd.java.basic.practice7;
+package com.epam.rd.java.basic.practice7.items;
 
-public class Delivery {
+import java.util.List;
+
+public class Order {
+
+    private String orderid;
     private String name;
     private String address;
     private String city;
     private String country;
+    private List<Item> items;
 
-    public Delivery() {
+    public String getOrderid() {
+        return orderid;
     }
 
-    public Delivery(String name, String address, String city, String country) {
-        this.name = name;
-        this.address = address;
-        this.city = city;
-        this.country = country;
+    public void setOrderid(String orderid) {
+        this.orderid = orderid;
     }
 
     public String getName() {
@@ -46,5 +49,13 @@ public class Delivery {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 }

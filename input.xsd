@@ -1,49 +1,25 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-   <xs:simpleType name="stringtype">
-      <xs:restriction base="xs:string"/>
-   </xs:simpleType>
-
-   <xs:simpleType name="inttype">
-      <xs:restriction base="xs:positiveInteger"/>
-   </xs:simpleType>
-
-   <xs:simpleType name="dectype">
-      <xs:restriction base="xs:decimal"/>
-   </xs:simpleType>
-
-   <xs:simpleType name="orderidtype">
-      <xs:restriction base="xs:string">
-         <xs:pattern value="[0-9]{6}"/>
-      </xs:restriction>
-   </xs:simpleType>
-
-   <xs:complexType name="shiptotype">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid Technologies Online Tools 1.0 (https://www.liquid-technologies.com) -->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="order">
+    <xs:complexType>
       <xs:sequence>
-         <xs:element name="name" type="stringtype"/>
-         <xs:element name="address" type="stringtype"/>
-         <xs:element name="city" type="stringtype"/>
-         <xs:element name="country" type="stringtype"/>
+        <xs:element name="orderid" type="xs:string" />
+        <xs:element name="name" type="xs:string" />
+        <xs:element name="address" type="xs:string" />
+        <xs:element name="city" type="xs:string" />
+        <xs:element name="country" type="xs:string" />
+        <xs:element maxOccurs="unbounded" name="item">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="title" type="xs:string" />
+              <xs:element minOccurs="0" name="note" type="xs:string" />
+              <xs:element name="quantity" type="xs:unsignedByte" />
+              <xs:element name="price" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:sequence>
-   </xs:complexType>
-
-   <xs:complexType name="itemtype">
-      <xs:sequence>
-         <xs:element name="title" type="stringtype"/>
-         <xs:element name="note" type="stringtype" minOccurs="0"/>
-         <xs:element name="quantity" type="inttype"/>
-         <xs:element name="price" type="dectype"/>
-      </xs:sequence>
-   </xs:complexType>
-
-   <xs:complexType name="shipordertype">
-      <xs:sequence>
-         <xs:element name="orderperson" type="stringtype"/>
-         <xs:element name="shipto" type="shiptotype"/>
-         <xs:element name="item" maxOccurs="unbounded" type="itemtype"/>
-      </xs:sequence>
-      <xs:attribute name="orderid" type="orderidtype" use="required"/>
-   </xs:complexType>
-
-   <xs:element name="shiporder" type="shipordertype"/>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
