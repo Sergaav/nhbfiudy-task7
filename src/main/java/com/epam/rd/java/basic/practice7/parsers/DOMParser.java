@@ -2,7 +2,7 @@ package com.epam.rd.java.basic.practice7.parsers;
 
 import com.epam.rd.java.basic.practice7.items.Item;
 import com.epam.rd.java.basic.practice7.items.Order;
-import com.epam.rd.java.basic.practice7.items.ShipOrder;
+import com.epam.rd.java.basic.practice7.items.Shiporder;
 import com.epam.rd.java.basic.practice7.items.XMLTegs;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -10,6 +10,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -31,9 +32,9 @@ public class DOMParser {
 
     private final String fileName;
 
-    private ShipOrder shipOrder;
+    private Shiporder shipOrder;
 
-    public ShipOrder getShipOrder() {
+    public Shiporder getShipOrder() {
         return shipOrder;
     }
 
@@ -46,10 +47,12 @@ public class DOMParser {
         dbf.setNamespaceAware(validate);
         dbf.setFeature(FEATURE_TURN_VALIDATION_ON, true);
         dbf.setFeature(FEATURE_TURN_SCHEMA_VALIDATION_ON, true);
+        dbf.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+        dbf.setFeature("http://xml.org/sax/features/external-general-entities", false);
         DocumentBuilder db = dbf.newDocumentBuilder();
         Document document = db.parse(fileName);
         Element root = document.getDocumentElement();
-        shipOrder = new ShipOrder();
+        shipOrder = new Shiporder();
         NodeList orderNodes = root
                 .getElementsByTagName(XMLTegs.ORDER.value());
         for (int i = 0; i < orderNodes.getLength(); i++) {
@@ -64,19 +67,14 @@ public class DOMParser {
         Element element = (Element) node;
         Node nodeOrder = element.getElementsByTagName(XMLTegs.ORDERID.value()).item(0);
         order.setOrderid(nodeOrder.getTextContent());
-        System.out.println(nodeOrder.getTextContent());
         Node nodeName = element.getElementsByTagName(XMLTegs.NAME.value()).item(0);
         order.setName(nodeName.getTextContent());
-        System.out.println(nodeName.getTextContent());
         Node nodeAddress = element.getElementsByTagName(XMLTegs.ADDRESS.value()).item(0);
         order.setAddress(nodeAddress.getTextContent());
-        System.out.println(nodeAddress.getTextContent());
         Node nodeCity = element.getElementsByTagName(XMLTegs.CITY.value()).item(0);
         order.setCity(nodeCity.getTextContent());
-        System.out.println(nodeCity.getTextContent());
         Node nodeCountry = element.getElementsByTagName(XMLTegs.COUNTRY.value()).item(0);
         order.setCountry(nodeCountry.getTextContent());
-        System.out.println(nodeCountry.getTextContent());
         NodeList listItems = element.getElementsByTagName(XMLTegs.ITEM.value());
         List<Item> list = new ArrayList<>();
         for (int i = 0; i < listItems.getLength(); i++) {
@@ -98,8 +96,10 @@ public class DOMParser {
         return item;
     }
 
-    public static Document getDocument(ShipOrder shipOrder) throws ParserConfigurationException {
+    public static Document getDocument(Shiporder shipOrder) throws ParserConfigurationException {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        dbf.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+        dbf.setFeature("http://xml.org/sax/features/external-general-entities", false);
         dbf.setNamespaceAware(true);
         DocumentBuilder db = dbf.newDocumentBuilder();
         Document document = db.newDocument();
@@ -131,7 +131,7 @@ public class DOMParser {
             Element countryElement =
                     document.createElement(XMLTegs.COUNTRY.value());
             countryElement.setTextContent(order.getCountry());
-            orderElement.appendChild(cityElement);
+            orderElement.appendChild(countryElement);
 
             for (Item item : order.getItems()) {
                 Element itemElement =
@@ -153,7 +153,7 @@ public class DOMParser {
         return document;
     }
 
-    public static void saveToXML(ShipOrder shipOrder, String xmlFileName)
+    public static void saveToXML(Shiporder shipOrder, String xmlFileName)
             throws ParserConfigurationException, TransformerException {
         saveToXML(getDocument(shipOrder), xmlFileName);
     }
@@ -164,6 +164,8 @@ public class DOMParser {
         StreamResult result = new StreamResult(new File(xmlFileName));
 
         TransformerFactory tf = TransformerFactory.newInstance();
+        tf.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        tf.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
         javax.xml.transform.Transformer t = tf.newTransformer();
         t.setOutputProperty(OutputKeys.INDENT, "yes");
         t.transform(new DOMSource(document), result);

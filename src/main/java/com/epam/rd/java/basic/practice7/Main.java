@@ -1,7 +1,7 @@
 package com.epam.rd.java.basic.practice7;
 
 
-import com.epam.rd.java.basic.practice7.items.ShipOrder;
+import com.epam.rd.java.basic.practice7.items.Shiporder;
 import com.epam.rd.java.basic.practice7.parsers.DOMParser;
 
 public final class Main {
@@ -12,7 +12,7 @@ public final class Main {
         String fileName = "input.xml";
         DOMParser domParser = new DOMParser(fileName);
         domParser.parse(true);
-        ShipOrder shipOrder = domParser.getShipOrder();
+        Shiporder shipOrder = domParser.getShipOrder();
 
         String outputXmlFile = "output.dom.xml";
         DOMParser.saveToXML(shipOrder, outputXmlFile);

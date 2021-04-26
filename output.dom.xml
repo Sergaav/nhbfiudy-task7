@@ -5,6 +5,7 @@
         <name>Ola Nordmann</name>
         <address>Langgt 23</address>
         <city>4000 Stavanger</city>
+        <country>Norway</country>
         <item>
             <title>Empire Burlesque</title>
             <quantity>1</quantity>
@@ -21,6 +22,7 @@
         <name>Angelina Jolie</name>
         <address>1st avenue 23</address>
         <city>Los Angeles</city>
+        <country>USA</country>
         <item>
             <title>Harry Potter and philosophy stone</title>
             <quantity>3</quantity>
