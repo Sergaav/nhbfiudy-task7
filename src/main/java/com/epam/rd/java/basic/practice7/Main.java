@@ -14,6 +14,9 @@ public final class Main {
         domParser.parse(true);
         ShipOrder shipOrder = domParser.getShipOrder();
 
+        String outputXmlFile = "output.dom.xml";
+        DOMParser.saveToXML(shipOrder, outputXmlFile);
+        System.out.println("Output ==> " + outputXmlFile);
 
 
     }

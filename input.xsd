@@ -1,26 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="http://epam.com.epam.rd.java.basic.practice7">
-  <xs:element name="order">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element name="orderid" type="xs:string" />
-        <xs:element name="name" type="xs:string" />
-        <xs:element name="address" type="xs:string" />
-        <xs:element name="city" type="xs:string" />
-        <xs:element name="country" type="xs:string" />
-        <xs:element maxOccurs="unbounded" name="item">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="title" type="xs:string" />
-              <xs:element minOccurs="0" name="note" type="xs:string" />
-              <xs:element name="quantity" type="xs:unsignedByte" />
-              <xs:element name="price" type="xs:decimal" />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-</xs:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://nure.ua/your_last_name/practice7"
+            xmlns:tns="http://nure.ua/your_last_name/practice7">
+
+    <xsd:element name="shiporder">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="order" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="orderid" type="xsd:string"/>
+                            <xsd:element name="name" type="xsd:string"/>
+                            <xsd:element name="address" type="xsd:string"/>
+                            <xsd:element name="city" type="xsd:string"/>
+                            <xsd:element name="country" type="xsd:string"/>
+                            <xsd:element maxOccurs="unbounded" name="item">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="title" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="note" type="xsd:string"/>
+                                        <xsd:element name="quantity" type="xsd:unsignedByte"/>
+                                        <xsd:element name="price" type="xsd:decimal"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

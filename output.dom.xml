@@ -1,42 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<p7:shiporder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xmlns:p7="http://nure.ua/your_last_name/practice7"
-              xsi:schemaLocation="http://nure.ua/your_last_name/practice7 input.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<shiporder>
     <order>
         <orderid>889923</orderid>
         <name>Ola Nordmann</name>
         <address>Langgt 23</address>
         <city>4000 Stavanger</city>
-        <country>Norway</country>
         <item>
             <title>Empire Burlesque</title>
             <quantity>1</quantity>
-            <price>10.90</price>
+            <price>10.9</price>
         </item>
-
         <item>
             <title>Hide your heart</title>
             <quantity>1</quantity>
-            <price>9.90</price>
+            <price>9.9</price>
         </item>
     </order>
-
     <order>
         <orderid>889985</orderid>
         <name>Angelina Jolie</name>
         <address>1st avenue 23</address>
         <city>Los Angeles</city>
-        <country>USA</country>
         <item>
             <title>Harry Potter and philosophy stone</title>
-            <note>Special Edition</note>
             <quantity>3</quantity>
             <price>99.99</price>
         </item>
         <item>
             <title>Star wars</title>
             <quantity>3</quantity>
-            <price>15.00</price>
+            <price>15.0</price>
         </item>
     </order>
-</p7:shiporder>
+</shiporder>

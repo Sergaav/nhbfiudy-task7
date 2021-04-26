@@ -20,6 +20,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DOMParser {
 
@@ -65,16 +67,22 @@ public class DOMParser {
         System.out.println(nodeOrder.getTextContent());
         Node nodeName = element.getElementsByTagName(XMLTegs.NAME.value()).item(0);
         order.setName(nodeName.getTextContent());
+        System.out.println(nodeName.getTextContent());
         Node nodeAddress = element.getElementsByTagName(XMLTegs.ADDRESS.value()).item(0);
         order.setAddress(nodeAddress.getTextContent());
+        System.out.println(nodeAddress.getTextContent());
         Node nodeCity = element.getElementsByTagName(XMLTegs.CITY.value()).item(0);
         order.setCity(nodeCity.getTextContent());
+        System.out.println(nodeCity.getTextContent());
         Node nodeCountry = element.getElementsByTagName(XMLTegs.COUNTRY.value()).item(0);
         order.setCountry(nodeCountry.getTextContent());
+        System.out.println(nodeCountry.getTextContent());
         NodeList listItems = element.getElementsByTagName(XMLTegs.ITEM.value());
+        List<Item> list = new ArrayList<>();
         for (int i = 0; i < listItems.getLength(); i++) {
-            order.getItems().add(getItem(listItems.item(i)));
+            list.add(getItem(listItems.item(i)));
         }
+        order.setItems(list);
         return order;
     }
 
@@ -98,62 +106,66 @@ public class DOMParser {
         Element tElement = document.createElement(XMLTegs.SHIPORDER.value());
         document.appendChild(tElement);
         for (Order order : shipOrder.getOrders()) {
-            Element qElement = document.createElement(XMLTegs.ORDER.value());
-            tElement.appendChild(qElement);
-            Element qtElement =
+            Element orderElement = document.createElement(XMLTegs.ORDER.value());
+            tElement.appendChild(orderElement);
+            Element orderIdElement =
                     document.createElement(XMLTegs.ORDERID.value());
-            qtElement.setTextContent(question.getQuestionText());
-            qElement.appendChild(qtElement);
+            orderIdElement.setTextContent(order.getOrderid());
+            orderElement.appendChild(orderIdElement);
 
-            // add answers
-            for (Answer answer : question.getAnswers()) {
-                Element aElement = document.createElement(XML.ANSWER.value());
-                aElement.setTextContent(answer.getContent());
+            Element nameElement =
+                    document.createElement(XMLTegs.NAME.value());
+            nameElement.setTextContent(order.getName());
+            orderElement.appendChild(nameElement);
 
-                // set attribute
-                if (answer.isCorrect()) {
-                    aElement.setAttribute(XML.CORRECT.value(), "true");
-                }
-                qElement.appendChild(aElement);
+            Element addressElement =
+                    document.createElement(XMLTegs.ADDRESS.value());
+            addressElement.setTextContent(order.getAddress());
+            orderElement.appendChild(addressElement);
+
+            Element cityElement =
+                    document.createElement(XMLTegs.CITY.value());
+            cityElement.setTextContent(order.getCity());
+            orderElement.appendChild(cityElement);
+
+            Element countryElement =
+                    document.createElement(XMLTegs.COUNTRY.value());
+            countryElement.setTextContent(order.getCountry());
+            orderElement.appendChild(cityElement);
+
+            for (Item item : order.getItems()) {
+                Element itemElement =
+                        document.createElement(XMLTegs.ITEM.value());
+                orderElement.appendChild(itemElement);
+                Element titleElement = document.createElement(XMLTegs.TITLE.value());
+                titleElement.setTextContent(item.getTitle());
+                itemElement.appendChild(titleElement);
+
+                Element quantityElement = document.createElement(XMLTegs.QUANTITY.value());
+                quantityElement.setTextContent(String.valueOf(item.getQuantity()));
+                itemElement.appendChild(quantityElement);
+
+                Element priceElement = document.createElement(XMLTegs.PRICE.value());
+                priceElement.setTextContent(String.valueOf(item.getPrice()));
+                itemElement.appendChild(priceElement);
             }
         }
-
         return document;
     }
 
-    /**
-     * Saves Test object to XML file.
-     *
-     * @param test
-     *            Test object to be saved.
-     * @param xmlFileName
-     *            Output XML file name.
-     */
-    public static void saveToXML(Test test, String xmlFileName)
+    public static void saveToXML(ShipOrder shipOrder, String xmlFileName)
             throws ParserConfigurationException, TransformerException {
-        // Test -> DOM -> XML
-        saveToXML(getDocument(test), xmlFileName);
+        saveToXML(getDocument(shipOrder), xmlFileName);
     }
 
-    /**
-     * Save DOM to XML.
-     *
-     * @param document
-     *            DOM to be saved.
-     * @param xmlFileName
-     *            Output XML file name.
-     */
     public static void saveToXML(Document document, String xmlFileName)
             throws TransformerException {
 
         StreamResult result = new StreamResult(new File(xmlFileName));
 
-        // set up transformation
         TransformerFactory tf = TransformerFactory.newInstance();
         javax.xml.transform.Transformer t = tf.newTransformer();
         t.setOutputProperty(OutputKeys.INDENT, "yes");
-
-        // run transformation
         t.transform(new DOMSource(document), result);
     }
 }
