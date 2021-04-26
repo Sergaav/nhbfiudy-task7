@@ -43,7 +43,7 @@ public class DOMParser {
 
     public void parse(boolean validate) throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        dbf.setNamespaceAware(true);
+        dbf.setNamespaceAware(validate);
         dbf.setFeature(FEATURE_TURN_VALIDATION_ON, true);
         dbf.setFeature(FEATURE_TURN_SCHEMA_VALIDATION_ON, true);
         DocumentBuilder db = dbf.newDocumentBuilder();
