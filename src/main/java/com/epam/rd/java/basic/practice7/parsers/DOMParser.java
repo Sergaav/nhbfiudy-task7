@@ -1,9 +1,6 @@
 package com.epam.rd.java.basic.practice7.parsers;
 
-import com.epam.rd.java.basic.practice7.items.Item;
-import com.epam.rd.java.basic.practice7.items.Order;
-import com.epam.rd.java.basic.practice7.items.Shiporder;
-import com.epam.rd.java.basic.practice7.items.XMLTegs;
+import com.epam.rd.java.basic.practice7.items.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -26,10 +23,6 @@ import java.util.List;
 
 public class DOMParser {
 
-    public static final String FEATURE_TURN_VALIDATION_ON = "http://xml.org/sax/features/validation";
-    public static final String FEATURE_TURN_SCHEMA_VALIDATION_ON = "http://apache.org/xml/features/validation/schema";
-
-
     private final String fileName;
 
     private Shiporder shipOrder;
@@ -45,8 +38,8 @@ public class DOMParser {
     public void parse(boolean validate) throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         dbf.setNamespaceAware(validate);
-        dbf.setFeature(FEATURE_TURN_VALIDATION_ON, true);
-        dbf.setFeature(FEATURE_TURN_SCHEMA_VALIDATION_ON, true);
+        dbf.setFeature(Constants.FEATURE_TURN_VALIDATION_ON, true);
+        dbf.setFeature(Constants.FEATURE_TURN_SCHEMA_VALIDATION_ON, true);
         dbf.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
         dbf.setFeature("http://xml.org/sax/features/external-general-entities", false);
         DocumentBuilder db = dbf.newDocumentBuilder();
