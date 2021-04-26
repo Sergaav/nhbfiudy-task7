@@ -27,7 +27,7 @@ public class DOMParser {
     public static final String FEATURE_TURN_SCHEMA_VALIDATION_ON = "http://apache.org/xml/features/validation/schema";
 
 
-    private String fileName;
+    private final String fileName;
 
     private ShipOrder shipOrder;
 
@@ -42,17 +42,18 @@ public class DOMParser {
     public void parse(boolean validate) throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         dbf.setNamespaceAware(true);
-        dbf.setFeature(FEATURE_TURN_SCHEMA_VALIDATION_ON, true);
+        dbf.setFeature(FEATURE_TURN_VALIDATION_ON, true);
         dbf.setFeature(FEATURE_TURN_SCHEMA_VALIDATION_ON, true);
         DocumentBuilder db = dbf.newDocumentBuilder();
         Document document = db.parse(fileName);
         Element root = document.getDocumentElement();
-        ShipOrder shipOrder = new ShipOrder();
+        shipOrder = new ShipOrder();
         NodeList orderNodes = root
                 .getElementsByTagName(XMLTegs.ORDER.value());
         for (int i = 0; i < orderNodes.getLength(); i++) {
             shipOrder.getOrders().add(getOrder(orderNodes.item(i)));
         }
+
 
     }
 
@@ -100,7 +101,7 @@ public class DOMParser {
             Element qElement = document.createElement(XMLTegs.ORDER.value());
             tElement.appendChild(qElement);
             Element qtElement =
-                    document.createElement(XML.QUESTION_TEXT.value());
+                    document.createElement(XMLTegs.ORDERID.value());
             qtElement.setTextContent(question.getQuestionText());
             qElement.appendChild(qtElement);
 

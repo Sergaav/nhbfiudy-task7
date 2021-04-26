@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tt:shiporder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xmlns:tt="http://xml.org/sax/features/validation"
-              xsi:noNamespaceSchemaLocation="input.xsd">
-    <order>
+<shiporder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns:pp="http://epam.com.epam.rd.java.basic.practice7"
+              xsi:schemaLocation="http://epam.com.epam.rd.java.basic.practice7 input.xsd">
+    <pp:order>
         <orderid>889923</orderid>
         <name>Ola Nordmann</name>
         <address>Langgt 23</address>
@@ -19,9 +19,9 @@
             <quantity>1</quantity>
             <price>9.90</price>
         </item>
-    </order>
+    </pp:order>
 
-    <order>
+    <pp:order>
         <orderid>889985</orderid>
         <name>Angelina Jolie</name>
         <address>1st avenue 23</address>
@@ -38,5 +38,5 @@
             <quantity>3</quantity>
             <price>15.00</price>
         </item>
-    </order>
-</tt:shiporder>
+    </pp:order>
+</shiporder>
