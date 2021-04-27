@@ -3,6 +3,7 @@ package com.epam.rd.java.basic.practice7.parsers;
 import com.epam.rd.java.basic.practice7.items.*;
 import org.xml.sax.helpers.DefaultHandler;
 
+import javax.xml.XMLConstants;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -35,6 +36,8 @@ public class STAXParser extends DefaultHandler {
         String currentElement = null;
 
         XMLInputFactory factory = XMLInputFactory.newInstance();
+        factory.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        factory.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
 
         factory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, true);
 
@@ -54,12 +57,10 @@ public class STAXParser extends DefaultHandler {
 
                 if (XMLTegs.SHIPORDER.equalsTo(currentElement)) {
                     shiporder = new Shiporder();
-                    continue;
                 }
 
                 if (XMLTegs.ORDER.equalsTo(currentElement)) {
                     order = new Order();
-                    continue;
                 }
 
                 if (XMLTegs.ITEM.equalsTo(currentElement)) {
@@ -70,53 +71,29 @@ public class STAXParser extends DefaultHandler {
             if (event.isCharacters()) {
                 Characters characters = event.asCharacters();
 
-                if (XMLTegs.ORDERID.equalsTo(currentElement)) {
-                    if (order != null) {
-                        order.setOrderid(characters.getData());
-                    }
-                    continue;
+                if (XMLTegs.ORDERID.equalsTo(currentElement) && order != null) {
+                    order.setOrderid(characters.getData());
                 }
-                if (XMLTegs.NAME.equalsTo(currentElement)) {
-                    if (order != null) {
-                        order.setName(characters.getData());
-                    }
-                    continue;
+                if (XMLTegs.NAME.equalsTo(currentElement) && order != null) {
+                    order.setName(characters.getData());
                 }
-                if (XMLTegs.ADDRESS.equalsTo(currentElement)) {
-                    if (order != null) {
-                        order.setAddress(characters.getData());
-                    }
-                    continue;
+                if (XMLTegs.ADDRESS.equalsTo(currentElement) && order != null) {
+                    order.setAddress(characters.getData());
                 }
-                if (XMLTegs.CITY.equalsTo(currentElement)) {
-                    if (order != null) {
-                        order.setCity(characters.getData());
-                    }
-                    continue;
+                if (XMLTegs.CITY.equalsTo(currentElement) && order != null) {
+                    order.setCity(characters.getData());
                 }
-                if (XMLTegs.COUNTRY.equalsTo(currentElement)) {
-                    if (order != null) {
-                        order.setCountry(characters.getData());
-                    }
-                    continue;
+                if (XMLTegs.COUNTRY.equalsTo(currentElement) && order != null) {
+                    order.setCountry(characters.getData());
                 }
-                if (XMLTegs.TITLE.equalsTo(currentElement)) {
-                    if (item != null) {
-                        item.setTitle(characters.getData());
-                    }
-                    continue;
+                if (XMLTegs.TITLE.equalsTo(currentElement) && item != null) {
+                    item.setTitle(characters.getData());
                 }
-                if (XMLTegs.QUANTITY.equalsTo(currentElement)) {
-                    if (item != null) {
-                        item.setQuantity(Integer.parseInt(characters.getData()));
-                    }
-                    continue;
+                if (XMLTegs.QUANTITY.equalsTo(currentElement) && item != null) {
+                    item.setQuantity(Integer.parseInt(characters.getData()));
                 }
-                if (XMLTegs.PRICE.equalsTo(currentElement)) {
-                    if (item != null) {
-                        item.setPrice(Double.parseDouble(characters.getData()));
-                    }
-                    continue;
+                if (XMLTegs.PRICE.equalsTo(currentElement) && (item != null)) {
+                    item.setPrice(Double.parseDouble(characters.getData()));
                 }
 
             }
@@ -127,19 +104,14 @@ public class STAXParser extends DefaultHandler {
 
                 if (XMLTegs.SHIPORDER.equalsTo(localName)) {
                     shiporder.getOrders().addAll(orders);
-                    continue;
                 }
 
-                if (XMLTegs.ORDER.equalsTo(localName)) {
-                    if (order != null) {
-                        order.setItems(items);
-                        orders.add(order);
-                    }
+                if (XMLTegs.ORDER.equalsTo(localName) && order != null) {
+                    order.setItems(items);
+                    orders.add(order);
                 }
-                if (XMLTegs.ITEM.equalsTo(localName)) {
-                    if (item != null) {
-                        items.add(item);
-                    }
+                if (XMLTegs.ITEM.equalsTo(localName) && item != null) {
+                    items.add(item);
                 }
             }
         }
