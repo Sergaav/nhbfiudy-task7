@@ -9,6 +9,8 @@ import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SAXParser extends DefaultHandler {
 
@@ -20,6 +22,8 @@ public class SAXParser extends DefaultHandler {
     private Order order;
 
     private Item item;
+    private List<Order> orderList;
+    private List<Item> itemList;
 
     public SAXParser(String xmlFileName) {
         this.xmlFileName = xmlFileName;
@@ -39,8 +43,8 @@ public class SAXParser extends DefaultHandler {
 
         javax.xml.parsers.SAXParser parser = factory.newSAXParser();
 
-        parser.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-        parser.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+//        parser.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+//        parser.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
         parser.parse(xmlFileName, this);
     }
 
@@ -65,11 +69,41 @@ public class SAXParser extends DefaultHandler {
         }
         if (XMLTegs.ORDER.equalsTo(currentElement)) {
             order = new Order();
+            if (orderList == null) {
+                orderList = new ArrayList<>();
+            }
+            return;
+        }
+        if (XMLTegs.ORDERID.equalsTo(currentElement)) {
+            return;
+        }
+        if (XMLTegs.NAME.equalsTo(currentElement)) {
+            return;
+        }
+        if (XMLTegs.ADDRESS.equalsTo(currentElement)) {
+            return;
+        }
+        if (XMLTegs.CITY.equalsTo(currentElement)) {
+            return;
+        }
+        if (XMLTegs.COUNTRY.equalsTo(currentElement)) {
             return;
         }
 
         if (XMLTegs.ITEM.equalsTo(currentElement)) {
             item = new Item();
+            if (itemList==null){
+                itemList=new ArrayList<>();
+            }
+            return;
+        }
+        if (XMLTegs.TITLE.equalsTo(currentElement)) {
+            return;
+        }
+        if (XMLTegs.QUANTITY.equalsTo(currentElement)) {
+            return;
+        }
+        if (XMLTegs.PRICE.equalsTo(currentElement)) {
             return;
         }
     }
@@ -85,13 +119,37 @@ public class SAXParser extends DefaultHandler {
             return;
         }
 
-        if (XMLTegs.QUESTION_TEXT.equalsTo(currentElement)) {
-            question.setQuestionText(elementText);
+        if (XMLTegs.ORDERID.equalsTo(currentElement)) {
+            order.setOrderid(elementText);
             return;
         }
 
-        if (XML.ANSWER.equalsTo(currentElement)) {
-            answer.setContent(elementText);
+        if (XMLTegs.NAME.equalsTo(currentElement)) {
+            order.setName(elementText);
+            return;
+        }
+        if (XMLTegs.ADDRESS.equalsTo(currentElement)) {
+            order.setAddress(elementText);
+            return;
+        }
+        if (XMLTegs.CITY.equalsTo(currentElement)) {
+            order.setCity(elementText);
+            return;
+        }
+        if (XMLTegs.COUNTRY.equalsTo(currentElement)) {
+            order.setCountry(elementText);
+            return;
+        }
+        if (XMLTegs.TITLE.equalsTo(currentElement)) {
+            item.setTitle(elementText);
+            return;
+        }
+        if (XMLTegs.QUANTITY.equalsTo(currentElement)) {
+            item.setQuantity(Integer.parseInt(elementText));
+            return;
+        }
+        if (XMLTegs.PRICE.equalsTo(currentElement)) {
+            item.setPrice(Double.parseDouble(elementText));
             return;
         }
     }
@@ -99,16 +157,15 @@ public class SAXParser extends DefaultHandler {
     @Override
     public void endElement(String uri, String localName, String qName)
             throws SAXException {
-
-        if (XML.QUESTION.equalsTo(localName)) {
-            // just add question to container
-            test.getQuestions().add(question);
+        if (XMLTegs.SHIPORDER.equalsTo(localName)){
+            shiporder.getOrders().addAll(orderList);
+        }
+        if (XMLTegs.ORDER.equalsTo(localName)) {
+            orderList.add(order);
             return;
         }
-
-        if (XML.ANSWER.equalsTo(localName)) {
-            // just add answer to container
-            question.getAnswers().add(answer);
+        if (XMLTegs.ITEM.equalsTo(localName)) {
+            itemList.add(item);
             return;
         }
     }
