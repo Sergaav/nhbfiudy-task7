@@ -20,7 +20,9 @@ public final class Main {
         String outputXmlFile = "output.dom.xml";
         DOMParser.saveToXML(shipOrder, outputXmlFile);
         System.out.println(outputXmlFile);
-                ////  SAX//////////
+        Sort.sortItemByPrice(shipOrder);
+        System.out.println(shipOrder);
+        System.out.println("////  SAX//////////");
 
         SAXParser saxController = new SAXParser(fileName);
         saxController.parse(true);
