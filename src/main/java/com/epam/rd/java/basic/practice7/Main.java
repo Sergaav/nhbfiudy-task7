@@ -4,6 +4,7 @@ package com.epam.rd.java.basic.practice7;
 import com.epam.rd.java.basic.practice7.items.Shiporder;
 import com.epam.rd.java.basic.practice7.parsers.DOMParser;
 import com.epam.rd.java.basic.practice7.parsers.SAXParser;
+import com.epam.rd.java.basic.practice7.sorter.Sort;
 
 public final class Main {
 
@@ -24,13 +25,12 @@ public final class Main {
         saxController.parse(true);
         Shiporder shiporder= saxController.getShiporder();
 
-        // sort  (case 2)
-      //  Sorter.sortQuestionsByAnswersNumber(test);
+        Sort.sortOrderByName(shiporder);
 
-        // save
+
         outputXmlFile = "output.sax.xml";
 
-        // other way:
+
         DOMParser.saveToXML(shipOrder, outputXmlFile);
         System.out.println("Output ==> " + outputXmlFile);
 

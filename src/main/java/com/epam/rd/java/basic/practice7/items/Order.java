@@ -1,5 +1,6 @@
 package com.epam.rd.java.basic.practice7.items;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
@@ -52,6 +53,9 @@ public class Order {
     }
 
     public List<Item> getItems() {
+        if (items == null) {
+            items = new ArrayList<>();
+        }
         return items;
     }
 

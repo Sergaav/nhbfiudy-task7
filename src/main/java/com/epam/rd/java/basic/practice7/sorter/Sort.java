@@ -46,16 +46,11 @@ public class Sort {
         domParser.parse(false);
         Shiporder shiporder = domParser.getShipOrder();
 
-        System.out.println("====================================");
-        System.out.println(shiporder);
-        System.out.println("====================================");
 
-        System.out.println("====================================");
+        System.out.println(shiporder);
         Sort.sortOrderByName(shiporder);
         System.out.println(shiporder);
-        System.out.println("====================================");
 
-        System.out.println("====================================");
         Sort.sortItemByPrice(shiporder);
         System.out.println(shiporder);
     }
