@@ -4,6 +4,7 @@ package com.epam.rd.java.basic.practice7;
 import com.epam.rd.java.basic.practice7.items.Shiporder;
 import com.epam.rd.java.basic.practice7.parsers.DOMParser;
 import com.epam.rd.java.basic.practice7.parsers.SAXParser;
+import com.epam.rd.java.basic.practice7.parsers.STAXParser;
 import com.epam.rd.java.basic.practice7.sorter.Sort;
 
 public final class Main {
@@ -31,6 +32,16 @@ public final class Main {
         outputXmlFile = "output.sax.xml";
 
 
+        DOMParser.saveToXML(shipOrder, outputXmlFile);
+        System.out.println("Output ==> " + outputXmlFile);
+
+        STAXParser staxController = new STAXParser(fileName);
+        staxController.parse();
+        shipOrder= staxController.getShiporder();
+
+        Sort.sortItemByPrice(shiporder);
+
+        outputXmlFile = "output.stax.xml";
         DOMParser.saveToXML(shipOrder, outputXmlFile);
         System.out.println("Output ==> " + outputXmlFile);
 

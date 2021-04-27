@@ -5,6 +5,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
@@ -41,6 +42,9 @@ public class SAXParser extends DefaultHandler {
         }
 
         javax.xml.parsers.SAXParser parser = factory.newSAXParser();
+       parser.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+       parser.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+
 
         parser.parse(xmlFileName, this);
     }
@@ -92,22 +96,11 @@ public class SAXParser extends DefaultHandler {
             if (itemList == null) {
                 itemList = new ArrayList<>();
             }
-            return;
-        }
-        if (XMLTegs.TITLE.equalsTo(currentElement)) {
-            return;
-        }
-        if (XMLTegs.QUANTITY.equalsTo(currentElement)) {
-            return;
-        }
-        if (XMLTegs.PRICE.equalsTo(currentElement)) {
-            return;
         }
     }
 
     @Override
-    public void characters(char[] ch, int start, int length)
-            throws SAXException {
+    public void characters(char[] ch, int start, int length) {
 
         String elementText = new String(ch, start, length).trim();
 
@@ -145,23 +138,17 @@ public class SAXParser extends DefaultHandler {
         }
         if (XMLTegs.PRICE.equalsTo(currentElement)) {
             item.setPrice(Double.parseDouble(elementText));
-            return;
         }
     }
 
     @Override
-    public void endElement(String uri, String localName, String qName)
-            throws SAXException {
-        if (XMLTegs.SHIPORDER.equalsTo(localName)) {
-            shiporder.getOrders().addAll(orderList);
-        }
+    public void endElement(String uri, String localName, String qName) {
+
         if (XMLTegs.ORDER.equalsTo(localName)) {
-            orderList.add(order);
-            return;
+            shiporder.getOrders().add(order);
         }
         if (XMLTegs.ITEM.equalsTo(localName)) {
-            itemList.add(item);
-            return;
+            order.getItems().add(item);
         }
     }
 
