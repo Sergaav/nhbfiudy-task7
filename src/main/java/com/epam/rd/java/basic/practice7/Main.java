@@ -12,7 +12,7 @@ public final class Main {
 
     public static void main(final String[] args) throws Exception {
 
-        String fileName = "input.xml";
+        String fileName = args[0];
         DOMParser domParser = new DOMParser(fileName);
         domParser.parse(true);
         Shiporder shipOrder = domParser.getShipOrder();

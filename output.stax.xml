@@ -12,14 +12,14 @@
             <price>10.9</price>
         </item>
         <item>
-            <title>Hide your heart</title>
-            <quantity>1</quantity>
-            <price>9.9</price>
-        </item>
-        <item>
             <title>Harry Potter and philosophy stone</title>
             <quantity>3</quantity>
             <price>99.99</price>
+        </item>
+        <item>
+            <title>Hide your heart</title>
+            <quantity>1</quantity>
+            <price>9.9</price>
         </item>
         <item>
             <title>Star wars</title>
@@ -39,14 +39,14 @@
             <price>10.9</price>
         </item>
         <item>
-            <title>Hide your heart</title>
-            <quantity>1</quantity>
-            <price>9.9</price>
-        </item>
-        <item>
             <title>Harry Potter and philosophy stone</title>
             <quantity>3</quantity>
             <price>99.99</price>
+        </item>
+        <item>
+            <title>Hide your heart</title>
+            <quantity>1</quantity>
+            <price>9.9</price>
         </item>
         <item>
             <title>Star wars</title>
