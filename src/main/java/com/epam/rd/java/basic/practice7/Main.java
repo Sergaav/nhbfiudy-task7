@@ -19,7 +19,7 @@ public final class Main {
 
         String outputXmlFile = "output.dom.xml";
         DOMParser.saveToXML(shipOrder, outputXmlFile);
-        System.out.println("Output ==> " + outputXmlFile);
+        System.out.println(outputXmlFile);
                 ////  SAX//////////
 
         SAXParser saxController = new SAXParser(fileName);
@@ -33,7 +33,7 @@ public final class Main {
 
 
         DOMParser.saveToXML(shipOrder, outputXmlFile);
-        System.out.println("Output ==> " + outputXmlFile);
+        System.out.println(outputXmlFile);
 
         STAXParser staxController = new STAXParser(fileName);
         staxController.parse();
@@ -43,7 +43,7 @@ public final class Main {
 
         outputXmlFile = "output.stax.xml";
         DOMParser.saveToXML(shipOrder, outputXmlFile);
-        System.out.println("Output ==> " + outputXmlFile);
+        System.out.println(outputXmlFile);
 
     }
 
