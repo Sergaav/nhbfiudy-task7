@@ -5,8 +5,6 @@ import com.epam.rd.java.basic.practice7.items.Shiporder;
 import com.epam.rd.java.basic.practice7.parsers.DOMParser;
 import com.epam.rd.java.basic.practice7.parsers.SAXParser;
 
-import javax.xml.transform.dom.DOMResult;
-
 public final class Main {
 
 
