@@ -5,7 +5,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
@@ -42,9 +41,6 @@ public class SAXParser extends DefaultHandler {
         }
 
         javax.xml.parsers.SAXParser parser = factory.newSAXParser();
-       parser.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-       parser.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
-
 
         parser.parse(xmlFileName, this);
     }
