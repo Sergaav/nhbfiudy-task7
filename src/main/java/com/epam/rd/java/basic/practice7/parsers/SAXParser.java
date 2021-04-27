@@ -5,7 +5,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
@@ -14,7 +13,7 @@ import java.util.List;
 
 public class SAXParser extends DefaultHandler {
 
-    private String xmlFileName;
+    private final String xmlFileName;
     private String currentElement;
 
     private Shiporder shiporder;
@@ -43,8 +42,6 @@ public class SAXParser extends DefaultHandler {
 
         javax.xml.parsers.SAXParser parser = factory.newSAXParser();
 
-//        parser.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-//        parser.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
         parser.parse(xmlFileName, this);
     }
 
@@ -59,7 +56,7 @@ public class SAXParser extends DefaultHandler {
 
     @Override
     public void startElement(String uri, String localName, String qName,
-                             Attributes attributes) throws SAXException {
+                             Attributes attributes) {
 
         currentElement = localName;
 
@@ -92,8 +89,8 @@ public class SAXParser extends DefaultHandler {
 
         if (XMLTegs.ITEM.equalsTo(currentElement)) {
             item = new Item();
-            if (itemList==null){
-                itemList=new ArrayList<>();
+            if (itemList == null) {
+                itemList = new ArrayList<>();
             }
             return;
         }
@@ -118,12 +115,10 @@ public class SAXParser extends DefaultHandler {
         if (elementText.isEmpty()) {
             return;
         }
-
         if (XMLTegs.ORDERID.equalsTo(currentElement)) {
             order.setOrderid(elementText);
             return;
         }
-
         if (XMLTegs.NAME.equalsTo(currentElement)) {
             order.setName(elementText);
             return;
@@ -157,7 +152,7 @@ public class SAXParser extends DefaultHandler {
     @Override
     public void endElement(String uri, String localName, String qName)
             throws SAXException {
-        if (XMLTegs.SHIPORDER.equalsTo(localName)){
+        if (XMLTegs.SHIPORDER.equalsTo(localName)) {
             shiporder.getOrders().addAll(orderList);
         }
         if (XMLTegs.ORDER.equalsTo(localName)) {
