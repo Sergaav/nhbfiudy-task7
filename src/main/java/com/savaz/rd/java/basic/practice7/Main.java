@@ -1,11 +1,11 @@
-package com.epam.rd.java.basic.practice7;
+package com.savaz.rd.java.basic.practice7;
 
 
-import com.epam.rd.java.basic.practice7.items.Shiporder;
-import com.epam.rd.java.basic.practice7.parsers.DOMParser;
-import com.epam.rd.java.basic.practice7.parsers.SAXParser;
-import com.epam.rd.java.basic.practice7.parsers.STAXParser;
-import com.epam.rd.java.basic.practice7.sorter.Sort;
+import com.savaz.rd.java.basic.practice7.items.Shiporder;
+import com.savaz.rd.java.basic.practice7.parsers.DOMParser;
+import com.savaz.rd.java.basic.practice7.parsers.SAXParser;
+import com.savaz.rd.java.basic.practice7.parsers.STAXParser;
+import com.savaz.rd.java.basic.practice7.sorter.Sort;
 
 public final class Main {
 

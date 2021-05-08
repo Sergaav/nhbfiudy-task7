@@ -1,6 +1,7 @@
-package com.epam.rd.java.basic.practice7.parsers;
+package com.savaz.rd.java.basic.practice7.parsers;
 
 import com.epam.rd.java.basic.practice7.items.*;
+import com.savaz.rd.java.basic.practice7.items.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

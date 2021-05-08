@@ -1,4 +1,4 @@
-package com.epam.rd.java.basic.practice7.items;
+package com.savaz.rd.java.basic.practice7.items;
 
 public class Constants {
     private Constants() {}

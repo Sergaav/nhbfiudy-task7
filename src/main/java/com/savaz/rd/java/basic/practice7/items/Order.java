@@ -1,4 +1,4 @@
-package com.epam.rd.java.basic.practice7.items;
+package com.savaz.rd.java.basic.practice7.items;
 
 import java.util.ArrayList;
 import java.util.List;

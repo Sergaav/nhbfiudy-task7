@@ -1,10 +1,10 @@
-package com.epam.rd.java.basic.practice7.sorter;
+package com.savaz.rd.java.basic.practice7.sorter;
 
-import com.epam.rd.java.basic.practice7.items.Constants;
-import com.epam.rd.java.basic.practice7.items.Item;
-import com.epam.rd.java.basic.practice7.items.Order;
-import com.epam.rd.java.basic.practice7.items.Shiporder;
-import com.epam.rd.java.basic.practice7.parsers.DOMParser;
+import com.savaz.rd.java.basic.practice7.items.Constants;
+import com.savaz.rd.java.basic.practice7.items.Item;
+import com.savaz.rd.java.basic.practice7.items.Order;
+import com.savaz.rd.java.basic.practice7.items.Shiporder;
+import com.savaz.rd.java.basic.practice7.parsers.DOMParser;
 
 import java.util.Comparator;
 

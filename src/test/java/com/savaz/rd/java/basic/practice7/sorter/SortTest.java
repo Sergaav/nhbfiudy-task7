@@ -1,9 +1,9 @@
-package com.epam.rd.java.basic.practice7.sorter;
+package com.savaz.rd.java.basic.practice7.sorter;
 
-import com.epam.rd.java.basic.practice7.items.Shiporder;
-import com.epam.rd.java.basic.practice7.parsers.DOMParser;
-import com.epam.rd.java.basic.practice7.parsers.SAXParser;
-import com.epam.rd.java.basic.practice7.parsers.STAXParser;
+import com.savaz.rd.java.basic.practice7.items.Shiporder;
+import com.savaz.rd.java.basic.practice7.parsers.DOMParser;
+import com.savaz.rd.java.basic.practice7.parsers.SAXParser;
+import com.savaz.rd.java.basic.practice7.parsers.STAXParser;
 import junit.framework.TestCase;
 import org.xml.sax.SAXException;
 
