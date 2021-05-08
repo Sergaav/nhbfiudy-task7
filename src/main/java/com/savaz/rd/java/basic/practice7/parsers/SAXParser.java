@@ -1,6 +1,5 @@
 package com.savaz.rd.java.basic.practice7.parsers;
 
-import com.epam.rd.java.basic.practice7.items.*;
 import com.savaz.rd.java.basic.practice7.items.*;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
